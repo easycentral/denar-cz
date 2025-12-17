@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="DenarCZ/DenarCZ.csproj" />
+  <Project Path="DenarData/DenarData.csproj" />
+  <Project Path="DenarForms/DenarForms.csproj" />
+</Solution>
