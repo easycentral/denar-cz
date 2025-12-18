@@ -31,6 +31,8 @@ namespace DenarCZ
                     var json = System.IO.File.ReadAllText(dialog.FileName);
                     var config = System.Text.Json.JsonSerializer.Deserialize<DenarCZ.Data.AppConfigSave>(json);
                     DenarCZ.Data.AppConfig.Instance.Load(config);
+                    AssetManager = new EntityManager<PrimaryAsset>(AppConfig.Instance.RootDataPath, "PrimaryAssets");
+                    AssetManager.LoadAll();
                     MessageBox.Show("Konfigurace byla úspìšnì naètena.", "Úspìch", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
@@ -83,11 +85,12 @@ namespace DenarCZ
 
         private void mnuAssetPrimary_Click(object sender, EventArgs e)
         {
+            AssetManager.LoadAll();
             DataListForm dataListForm = new DataListForm()
             {
                 Text = "Správa primárních aktiv",
 
-                DataItems = AssetManager.Items.Cast<IDataItem>().ToList()
+                DataItems = AssetManager.Items.Values.Cast<IDataItem>().ToList()
             };
             
             dataListForm.pnlData.Controls.Add(new PrimaryAssetsGrid(AssetManager)

@@ -29,11 +29,40 @@ namespace DenarForms.Grids
             grdData.Columns["AvailabilityRequirement"].HeaderText = "Dostupnost";
             grdData.Columns["Criticality"].HeaderText = "Kritičnost";
 
+        }
+        protected override void grdData_UserAddedRow(object sender, DataGridViewRowEventArgs e)
+        {
+            base.grdData_UserAddedRow(sender, e);
+            // Při přidání nového řádku můžeme nastavit výchozí hodnoty
+            //var newRow = e.Row.DataBoundItem as PrimaryAsset;
+            var newRow = new PrimaryAsset();
+            
+            if (newRow != null)
+            {
+                newRow.Id= Guid.NewGuid();
+                newRow.LastModified = DateTime.Now;
+                SaveRow(newRow);
+            }
+        }
+        protected override void grdData_RowValidated(object sender, DataGridViewCellEventArgs e)
+        {
+            base.grdData_RowValidated(sender, e);
+            // Při validaci řádku můžeme aktualizovat čas poslední úpravy
+            var row = grdData.Rows[e.RowIndex];
+            var item = row.DataBoundItem as PrimaryAsset;
+            if (item != null)
+            {
+                SaveRow(item);
+                //item.LastModified = DateTime.Now;
+            }
 
+        }
 
-
-
-
+        protected override void grdData_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            base.grdData_CellValidating(sender, e);
+            // Příklad vlastní validace: Název aktiva nesmí být prázdný
+            
         }
     }
 }

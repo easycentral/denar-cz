@@ -13,7 +13,8 @@ namespace DenarForms.Common
     {
         private EntityManager<T> _manager;
         private BindingSource _bindingSource = new BindingSource();
-        
+        private BindingList<T>? _list;
+
 
         public DataListControl(EntityManager<T> manager)
         {
@@ -21,6 +22,29 @@ namespace DenarForms.Common
             _manager = manager;
             SetupGrid();
         }
+
+
+        public void BindData(IDictionary<Guid, IDataItem> dict)
+        {
+            // Bezpečně proměnit na T (jen ty prvky, které jsou T)
+            var items = dict.Values.OfType<T>().ToList();
+            _list = new BindingList<T>(items);
+
+            // Napojit na grid přes Base
+            BindList(_list);
+        }
+
+        public T? SelectedItem => grdData.CurrentRow?.DataBoundItem as T;
+
+        /// <summary>
+        /// Vrátí editovaný BindingList<T> (po commitnutí změn).
+        /// </summary>
+        public BindingList<T> GetEditedList()
+        {
+            CommitEdits();
+            return _list ?? new BindingList<T>();
+        }
+
 
         private void SetupGrid()
         {
@@ -42,11 +66,17 @@ namespace DenarForms.Common
             _bindingSource.DataSource = _manager.Items.Values.ToList();
         }
 
+        public void SaveRow(T item)
+        {
+            _manager.SaveItem(item);
+        }
+
         public virtual void ConfigureGrid()
         {
             // Metoda pro další konfiguraci mřížky, může být přepsána v odvozených třídách
         }
 
+        
 
 
     }

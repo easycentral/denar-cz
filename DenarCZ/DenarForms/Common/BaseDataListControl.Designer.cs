@@ -44,6 +44,14 @@
             grdData.Name = "grdData";
             grdData.Size = new Size(1041, 697);
             grdData.TabIndex = 0;
+            grdData.CellParsing += grdData_CellParsing;
+            grdData.CellValidating += grdData_CellValidating;
+            grdData.ColumnAdded += grdData_ColumnAdded;
+            grdData.CurrentCellDirtyStateChanged += grdData_CurrentCellDirtyStateChanged;
+            grdData.DataError += grdData_DataError;
+            grdData.RowValidated += grdData_RowValidated;
+            grdData.RowValidating += grdData_RowValidating;
+            grdData.UserAddedRow += grdData_UserAddedRow;
             // 
             // btnEdit
             // 

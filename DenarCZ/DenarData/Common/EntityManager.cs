@@ -61,7 +61,7 @@ namespace DenarData.Common
                 }
 
                 item.LastModified = DateTime.Now;
-                var dataToSave = item.GetSaveData();
+                T dataToSave = (T) item.GetSaveData();
                 string jsonString = JsonSerializer.Serialize(dataToSave, new JsonSerializerOptions { WriteIndented = true });
 
                 File.WriteAllText(fileName, jsonString);
