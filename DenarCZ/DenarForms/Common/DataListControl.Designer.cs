@@ -2,7 +2,7 @@
 
 namespace DenarForms.Common
 {
-    partial class DataListControl<T> : dataList where T : class, IDataItem, new ()
+    partial class DataListControl<T> : BaseDataListControl where T : class, IDataItem, new ()
     {
         /// <summary> 
         /// Vyžaduje se proměnná návrháře.

@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace DenarForms.Common
 {
-    public partial class dataList : UserControl
+    public partial class BaseDataListControl : UserControl
     {
-        public dataList()
+        public BaseDataListControl()
         {
             InitializeComponent();
         }

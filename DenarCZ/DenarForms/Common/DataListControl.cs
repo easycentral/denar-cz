@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace DenarForms.Common
 {
-    public partial class DataListControl<T> : dataList where T : class, IDataItem, new()
+    public partial class DataListControl<T> : BaseDataListControl where T : class, IDataItem, new()
     {
         private EntityManager<T> _manager;
         private BindingSource _bindingSource = new BindingSource();

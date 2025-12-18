@@ -1,6 +1,6 @@
 ﻿namespace DenarForms.Common
 {
-    partial class dataList
+    partial class BaseDataListControl
     {
         /// <summary> 
         /// Vyžaduje se proměnná návrháře.
@@ -31,6 +31,7 @@
             grdData = new DataGridView();
             btnEdit = new Button();
             btnDelete = new Button();
+            btnNew = new Button();
             ((System.ComponentModel.ISupportInitialize)grdData).BeginInit();
             SuspendLayout();
             // 
@@ -41,13 +42,12 @@
             grdData.Location = new Point(17, 60);
             grdData.Margin = new Padding(3, 4, 3, 4);
             grdData.Name = "grdData";
-            grdData.ReadOnly = true;
             grdData.Size = new Size(1041, 697);
             grdData.TabIndex = 0;
             // 
             // btnEdit
             // 
-            btnEdit.Location = new Point(17, 25);
+            btnEdit.Location = new Point(134, 25);
             btnEdit.Margin = new Padding(3, 4, 3, 4);
             btnEdit.Name = "btnEdit";
             btnEdit.Size = new Size(86, 28);
@@ -57,6 +57,7 @@
             // 
             // btnDelete
             // 
+            btnDelete.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnDelete.Location = new Point(972, 25);
             btnDelete.Margin = new Padding(3, 4, 3, 4);
             btnDelete.Name = "btnDelete";
@@ -65,16 +66,27 @@
             btnDelete.Text = "Smazat";
             btnDelete.UseVisualStyleBackColor = true;
             // 
-            // dataList
+            // btnNew
+            // 
+            btnNew.Location = new Point(17, 24);
+            btnNew.Margin = new Padding(3, 4, 3, 4);
+            btnNew.Name = "btnNew";
+            btnNew.Size = new Size(111, 28);
+            btnNew.TabIndex = 1;
+            btnNew.Text = "Nový záznam";
+            btnNew.UseVisualStyleBackColor = true;
+            // 
+            // BaseDataListControl
             // 
             AutoScaleDimensions = new SizeF(8F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(btnDelete);
+            Controls.Add(btnNew);
             Controls.Add(btnEdit);
             Controls.Add(grdData);
             Font = new Font("Consolas", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
             Margin = new Padding(3, 4, 3, 4);
-            Name = "dataList";
+            Name = "BaseDataListControl";
             Size = new Size(1078, 780);
             ((System.ComponentModel.ISupportInitialize)grdData).EndInit();
             ResumeLayout(false);
@@ -85,5 +97,6 @@
         internal DataGridView grdData;
         private Button btnEdit;
         private Button btnDelete;
+        private Button btnNew;
     }
 }
