@@ -20,6 +20,7 @@ namespace DenarForms.Grids
             // Zde můžete přidat další konfigurace specifické pro PrimaryAsset, pokud je potřeba
             grdData.Columns["Id"].HeaderText = "ID";
             grdData.Columns["LastModified"].HeaderText = "Upraveno";
+            grdData.Columns["LastModified"].ReadOnly = true;
             grdData.Columns["Name"].HeaderText = "Název aktiva";
             grdData.Columns["Description"].Visible = false;
             grdData.Columns["AssetCategory"].HeaderText = "Kategorie";
@@ -52,8 +53,9 @@ namespace DenarForms.Grids
             var item = row.DataBoundItem as PrimaryAsset;
             if (item != null)
             {
+                item.LastModified = DateTime.Now;
                 SaveRow(item);
-                //item.LastModified = DateTime.Now;
+                
             }
 
         }
