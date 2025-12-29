@@ -66,5 +66,25 @@ namespace DenarForms.Grids
             // Příklad vlastní validace: Název aktiva nesmí být prázdný
             
         }
+
+        protected override void grdData_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
+        {
+            if (grdData.ReadOnly)             {
+                e.Cancel = true;
+                return;
+            }
+            if (MessageBox.Show("Opravdu chcete smazat vybrané aktivum?", "Potvrzení smazání", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes)
+            {
+                e.Cancel = true;
+                return;
+            }
+            //base.grdData_UserDeletingRow(sender, e);
+            var row = e.Row;
+            var item = row.DataBoundItem as PrimaryAsset;
+            if (item != null)
+            {
+                DeleteRow(item);
+            }
+        }
     }
 }

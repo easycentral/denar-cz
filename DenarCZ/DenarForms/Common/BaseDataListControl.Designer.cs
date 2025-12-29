@@ -32,6 +32,7 @@
             btnEdit = new Button();
             btnDelete = new Button();
             btnNew = new Button();
+            chkReadOnly = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)grdData).BeginInit();
             SuspendLayout();
             // 
@@ -42,16 +43,19 @@
             grdData.Location = new Point(17, 60);
             grdData.Margin = new Padding(3, 4, 3, 4);
             grdData.Name = "grdData";
-            grdData.Size = new Size(1041, 697);
+            grdData.ReadOnly = true;
+            grdData.Size = new Size(1041, 681);
             grdData.TabIndex = 0;
             grdData.CellParsing += grdData_CellParsing;
             grdData.CellValidating += grdData_CellValidating;
             grdData.ColumnAdded += grdData_ColumnAdded;
             grdData.CurrentCellDirtyStateChanged += grdData_CurrentCellDirtyStateChanged;
             grdData.DataError += grdData_DataError;
+            grdData.RowsRemoved += grdData_RowsRemoved;
             grdData.RowValidated += grdData_RowValidated;
             grdData.RowValidating += grdData_RowValidating;
             grdData.UserAddedRow += grdData_UserAddedRow;
+            grdData.UserDeletingRow += grdData_UserDeletingRow;
             // 
             // btnEdit
             // 
@@ -83,11 +87,26 @@
             btnNew.TabIndex = 1;
             btnNew.Text = "Nový záznam";
             btnNew.UseVisualStyleBackColor = true;
+            btnNew.Click += btnNew_Click;
+            // 
+            // chkReadOnly
+            // 
+            chkReadOnly.AutoSize = true;
+            chkReadOnly.Checked = true;
+            chkReadOnly.CheckState = CheckState.Checked;
+            chkReadOnly.Location = new Point(17, 748);
+            chkReadOnly.Name = "chkReadOnly";
+            chkReadOnly.Size = new Size(147, 22);
+            chkReadOnly.TabIndex = 3;
+            chkReadOnly.Text = "Pouze pro čtení";
+            chkReadOnly.UseVisualStyleBackColor = true;
+            chkReadOnly.CheckedChanged += chkReadOnly_CheckedChanged;
             // 
             // BaseDataListControl
             // 
             AutoScaleDimensions = new SizeF(8F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(chkReadOnly);
             Controls.Add(btnDelete);
             Controls.Add(btnNew);
             Controls.Add(btnEdit);
@@ -98,6 +117,7 @@
             Size = new Size(1078, 780);
             ((System.ComponentModel.ISupportInitialize)grdData).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -106,5 +126,6 @@
         private Button btnEdit;
         private Button btnDelete;
         private Button btnNew;
+        private CheckBox chkReadOnly;
     }
 }

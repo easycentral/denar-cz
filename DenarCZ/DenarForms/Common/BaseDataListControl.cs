@@ -81,5 +81,26 @@ namespace DenarForms.Common
         {
 
         }
+
+        protected virtual void grdData_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+
+        }
+
+        protected virtual void grdData_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
+        {
+
+        }
+
+        private void chkReadOnly_CheckedChanged(object sender, EventArgs e)
+        {
+            grdData.ReadOnly = chkReadOnly.Checked;
+        }
+
+        protected virtual void btnNew_Click(object sender, EventArgs e)
+        {
+            
+
+        }
     }
 }

@@ -28,5 +28,15 @@ namespace DenarCZ.Forms
 
 
         }
+        public void OpenDetailForm(IDataItem item)
+        {
+            DataDetailForm detailForm = new DataDetailForm
+            {
+                Text = "Detail",
+                DataItem = item
+            };
+            detailForm.MdiParent = this.MdiParent;
+            detailForm.Show();
+        }
     }
 }

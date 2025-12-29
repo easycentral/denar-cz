@@ -76,7 +76,13 @@ namespace DenarForms.Common
             // Metoda pro další konfiguraci mřížky, může být přepsána v odvozených třídách
         }
 
-        
+        public void DeleteRow(T item)
+        {
+            _manager.DeleteItem(item.Id);
+            RefreshData();
+        }
+
+
 
 
     }
