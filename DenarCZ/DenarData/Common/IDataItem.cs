@@ -10,5 +10,7 @@ namespace DenarData.Common
         public DateTime LastModified { get; set; } // Pro detekci konfliktů
         public IDataItem GetSaveData();
         public int Load(IDataItem item);
+        public Type getType();
+        
     }
 }

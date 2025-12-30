@@ -25,5 +25,10 @@ namespace DenarCZ.Data
             }
             return -1;
         }
+
+        public Type getType()
+        {
+            return typeof(AppConfigSave);
+        }
     }
 }

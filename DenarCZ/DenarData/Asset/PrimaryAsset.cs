@@ -62,5 +62,10 @@ namespace DenarData.Asset
             }
             return -1;
         }
+
+        public Type getType()
+        {
+            return typeof(PrimaryAsset);
+        }
     }
 }

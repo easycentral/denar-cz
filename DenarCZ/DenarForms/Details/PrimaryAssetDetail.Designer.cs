@@ -1,6 +1,6 @@
-﻿namespace DenarForms.Common
+﻿namespace DenarForms.Details
 {
-    partial class BaseDataDetailControl
+    partial class PrimaryAssetDetail
     {
         /// <summary> 
         /// Vyžaduje se proměnná návrháře.
@@ -28,30 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            grdData = new PropertyGrid();
-            SuspendLayout();
-            // 
-            // grdData
-            // 
-            grdData.BackColor = SystemColors.Control;
-            grdData.Dock = DockStyle.Fill;
-            grdData.Location = new Point(0, 0);
-            grdData.Name = "grdData";
-            grdData.Size = new Size(880, 666);
-            grdData.TabIndex = 0;
-            // 
-            // BaseDataDetailControl
-            // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(grdData);
-            Name = "BaseDataDetailControl";
-            Size = new Size(880, 666);
-            ResumeLayout(false);
+            components = new System.ComponentModel.Container();
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         }
 
         #endregion
-
-        public PropertyGrid grdData;
     }
 }

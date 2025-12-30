@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DenarData.Common;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,8 +9,11 @@ using System.Windows.Forms;
 
 namespace DenarForms.Common
 {
+
+
     public partial class BaseDataListControl : UserControl
     {
+        public event EventHandler<ItemEventArgs>? NewItemRequested;
         protected BindingSource Source { get; } = new BindingSource();
         public BaseDataListControl()
         {
@@ -29,7 +33,10 @@ namespace DenarForms.Common
         }
 
 
-
+        public virtual EntityManager<T> GetEntityManager<T>() where T : class, IDataItem, new()
+        {
+            throw new NotImplementedException("GetEntityManager<T> must be implemented in derived classes.");
+        }
 
         protected virtual void grdData_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
@@ -99,8 +106,19 @@ namespace DenarForms.Common
 
         protected virtual void btnNew_Click(object sender, EventArgs e)
         {
-            
+            NewItemRequested?.Invoke(this, new ItemEventArgs(NewItem()));
 
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            var selectedItem = Source.Current as IDataItem;
+            NewItemRequested?.Invoke(this, new ItemEventArgs(selectedItem!));
+        }
+
+        protected virtual IDataItem NewItem()
+        {
+            throw new NotImplementedException("NewItem must be implemented in derived classes.");
         }
     }
 }

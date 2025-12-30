@@ -10,6 +10,8 @@ namespace DenarForms.Common
 {
     public partial class BaseDataDetailControl : UserControl
     {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public object EditedItem { get; set; } = null;
         public BaseDataDetailControl()
         {
             InitializeComponent();

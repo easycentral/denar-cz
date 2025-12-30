@@ -71,5 +71,10 @@ namespace DenarCZ.Data
             Directory.CreateDirectory(Path.Combine(RootDataPath, "SupportingAssets"));
             Directory.CreateDirectory(Path.Combine(RootDataPath, "Risks"));
         }
+
+        public Type getType()
+        {
+            return typeof(AppConfig);
+        }
     }
 }

@@ -26,7 +26,9 @@ namespace DenarForms.Common
         {
 
             grdData.SelectedObject = _item;
-
+            grdData.Visible = true;
+            grdData.BringToFront();
+            grdData.Refresh();
             // Můžeme skrýt sloupce, které uživatel nemusí vidět (např. Guid)
             //if (grdData.Columns.Contains("Id"))
             //    grdData.Columns["Id"].Visible = false;

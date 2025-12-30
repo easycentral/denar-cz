@@ -66,6 +66,7 @@
             btnEdit.TabIndex = 1;
             btnEdit.Text = "Upravit";
             btnEdit.UseVisualStyleBackColor = true;
+            btnEdit.Click += btnEdit_Click;
             // 
             // btnDelete
             // 

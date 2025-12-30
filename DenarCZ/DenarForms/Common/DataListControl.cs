@@ -23,6 +23,15 @@ namespace DenarForms.Common
             SetupGrid();
         }
 
+        public override EntityManager<TItem> GetEntityManager<TItem>()
+        {
+            // Ověření, že TItem odpovídá T
+            if (typeof(TItem) != typeof(T))
+                throw new InvalidOperationException("Typ TItem musí odpovídat typu T použitému v DataListControl.");
+
+            // Přetypování na správný generický typ
+            return (EntityManager<TItem>)(object)_manager;
+        }
 
         public void BindData(IDictionary<Guid, IDataItem> dict)
         {

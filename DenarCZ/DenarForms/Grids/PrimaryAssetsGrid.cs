@@ -14,6 +14,11 @@ namespace DenarForms.Grids
         {
         }
 
+        public override EntityManager<PrimaryAsset> GetEntityManager<PrimaryAsset>()
+        {
+            return base.GetEntityManager<PrimaryAsset>();
+        }
+
         public override void ConfigureGrid()
         {
             base.ConfigureGrid();
@@ -86,5 +91,12 @@ namespace DenarForms.Grids
                 DeleteRow(item);
             }
         }
+
+        protected override IDataItem NewItem()
+        {
+            return new PrimaryAsset();
+            
+        }
+
     }
 }
