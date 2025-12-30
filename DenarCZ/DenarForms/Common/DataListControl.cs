@@ -91,7 +91,16 @@ namespace DenarForms.Common
             RefreshData();
         }
 
+        protected override void btnEdit_Click(object sender, EventArgs e)
+        {
 
+            T? selectedItem = SelectedItem;
+            if (selectedItem is null) return;
+
+            // Vyvolej událost přes base raising metodu
+            OnEditItemRequested(new ItemEventArgs(selectedItem));
+
+        }
 
 
     }

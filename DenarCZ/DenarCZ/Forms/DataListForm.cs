@@ -1,7 +1,6 @@
 ﻿using DenarData.Asset;
 using DenarData.Common;
 using DenarForms.Common;
-using DenarForms.Details;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -29,7 +28,7 @@ namespace DenarCZ.Forms
             if (pnlData.Controls.Count > 0)
             {
                 BaseDataListControl grd = (BaseDataListControl) pnlData.Controls[0];
-                grd.NewItemRequested += (s, ea) =>
+                grd.EditItemRequested += (s, ea) =>
                 {
                     var itemType = ea.Item.GetType();
                     

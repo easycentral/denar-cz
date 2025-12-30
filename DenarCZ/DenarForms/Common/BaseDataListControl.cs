@@ -13,7 +13,7 @@ namespace DenarForms.Common
 
     public partial class BaseDataListControl : UserControl
     {
-        public event EventHandler<ItemEventArgs>? NewItemRequested;
+        public event EventHandler<ItemEventArgs>? EditItemRequested;
         protected BindingSource Source { get; } = new BindingSource();
         public BaseDataListControl()
         {
@@ -106,15 +106,23 @@ namespace DenarForms.Common
 
         protected virtual void btnNew_Click(object sender, EventArgs e)
         {
-            NewItemRequested?.Invoke(this, new ItemEventArgs(NewItem()));
+            EditItemRequested?.Invoke(this, new ItemEventArgs(NewItem()));
 
         }
 
-        private void btnEdit_Click(object sender, EventArgs e)
+        protected virtual void btnEdit_Click(object sender, EventArgs e)
         {
-            var selectedItem = Source.Current as IDataItem;
-            NewItemRequested?.Invoke(this, new ItemEventArgs(selectedItem!));
+            //var selectedItem = Source.Current as IDataItem;
+            //NewItemRequested?.Invoke(this, new ItemEventArgs(selectedItem!));
         }
+
+
+        protected virtual void OnEditItemRequested(ItemEventArgs e)
+        {
+            EditItemRequested?.Invoke(this, e);
+        }
+
+
 
         protected virtual IDataItem NewItem()
         {
