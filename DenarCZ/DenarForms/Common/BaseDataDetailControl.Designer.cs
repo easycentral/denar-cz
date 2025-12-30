@@ -39,6 +39,7 @@
             grdData.Name = "grdData";
             grdData.Size = new Size(880, 666);
             grdData.TabIndex = 0;
+            grdData.PropertyValueChanged += grdData_PropertyValueChanged;
             // 
             // BaseDataDetailControl
             // 

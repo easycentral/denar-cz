@@ -63,16 +63,20 @@ namespace DenarCZ.Forms
             };
             detailForm.MdiParent = this.MdiParent;
             var itemType = item.GetType();
-            switch (itemType.Name)
-            {
-                case "PrimaryAsset":
-                    pnlData.Controls.Add(new PrimaryAssetDetail(manager as EntityManager<PrimaryAsset>,item));
-                    break;
-                // Add cases for other IDataItem implementations as needed
-                default:
+            detailForm.pnlData.Controls.Add(new DataDetailControl<T>(manager as EntityManager<T>, item));
+            detailForm.pnlData.Controls[0].Dock = DockStyle.Fill;
+            //switch (itemType.Name)
+            //{
+            //    case "PrimaryAsset":
+            //        //detailForm.pnlData.Controls.Add(new PrimaryAssetDetail(manager as EntityManager<PrimaryAsset>,item));
+            //        detailForm.pnlData.Controls.Add(new DataDetailControl<T>(manager as EntityManager<T>, item));
+            //        detailForm.pnlData.Controls[0].Dock = DockStyle.Fill;
+            //        break;
+            //    // Add cases for other IDataItem implementations as needed
+            //    default:
 
-                    break;
-            }
+            //        break;
+            //}
             
             detailForm.Show();
         }

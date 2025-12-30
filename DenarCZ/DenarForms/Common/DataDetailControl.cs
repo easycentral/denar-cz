@@ -15,9 +15,10 @@ namespace DenarForms.Common
         private IDataItem _item;
         public DataDetailControl(EntityManager<T> manager, IDataItem item)
         {
-            InitializeComponent();
             _manager = manager;
             _item = item;
+            InitializeComponent();
+            
             SetupGrid();
 
         }
@@ -38,6 +39,12 @@ namespace DenarForms.Common
         public virtual void ConfigureGrid()
         {
             // Metoda pro další konfiguraci mřížky, může být přepsána v odvozených třídách
+        }
+
+        protected override void grdData_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
+        {
+            base.grdData_PropertyValueChanged(s, e);
+            _manager.SaveItem((T)_item);
         }
     }
 }

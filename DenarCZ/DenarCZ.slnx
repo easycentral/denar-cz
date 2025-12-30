@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="DenarCommon/DenarCommon.csproj" Id="31336bcd-7fb0-4e97-8b99-1a7cd3e829cf" />
   <Project Path="DenarCZ/DenarCZ.csproj" />
   <Project Path="DenarData/DenarData.csproj" />
   <Project Path="DenarForms/DenarForms.csproj" />

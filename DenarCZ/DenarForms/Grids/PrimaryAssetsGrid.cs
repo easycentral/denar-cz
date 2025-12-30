@@ -22,6 +22,7 @@ namespace DenarForms.Grids
         public override void ConfigureGrid()
         {
             base.ConfigureGrid();
+            return;
             // Zde můžete přidat další konfigurace specifické pro PrimaryAsset, pokud je potřeba
             grdData.Columns["Id"].HeaderText = "ID";
             grdData.Columns["LastModified"].HeaderText = "Upraveno";

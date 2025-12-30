@@ -16,5 +16,10 @@ namespace DenarForms.Common
         {
             InitializeComponent();
         }
+
+        protected virtual void grdData_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
+        {
+            grdData.Refresh();
+        }
     }
 }
