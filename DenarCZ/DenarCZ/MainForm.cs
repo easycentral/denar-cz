@@ -92,15 +92,20 @@ namespace DenarCZ
 
                 DataItems = AssetManager.Items.Values.Cast<IDataItem>().ToList()
             };
-            
+
             dataListForm.pnlData.Controls.Add(new PrimaryAssetsGrid(AssetManager)
             {
                 Dock = DockStyle.Fill,
 
             });
 
-            dataListForm.MdiParent= this;
+            dataListForm.MdiParent = this;
             dataListForm.Show();
+        }
+
+        private void mnuFileExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

@@ -20,9 +20,23 @@ namespace DenarCZ.Forms
         private void btnOK_Click(object sender, EventArgs e)
         {
             AppConfig.Instance.OrganizationName = txtOrganizationName.Text;
+            AppConfig.Instance.ConfidentialityLevels = txtConfidentialityLevels.Text;
+            AppConfig.Instance.ConfidentialityLabels = txtConfidentialityLabels.Text;
+            AppConfig.Instance.IntegrityLevels = txtIntegrityLevels.Text;
+            AppConfig.Instance.IntegrityLabels = txtIntegrityLabels.Text;
+            AppConfig.Instance.AvailabilityLevels = txtAvailabilityLevels.Text;
+            AppConfig.Instance.AvailabilityLabels = txtAvailabilityLabels.Text;
+            List<string> categories = new List<string>();
+            foreach (var item in lstCategories.Items)
+            {
+                categories.Add(item.ToString());
+            }
+            categories.Sort();
+            AppConfig.Instance.AssetCategories = string.Join(";", categories);
+
             var config = AppConfig.Instance.GetSaveData();
             var json = System.Text.Json.JsonSerializer.Serialize(config, config.GetType(), new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText(Path.Combine(AppConfig.Instance.RootDataPath,AppConfig.Instance.DataFileName), json);
+            File.WriteAllText(Path.Combine(AppConfig.Instance.RootDataPath, AppConfig.Instance.DataFileName), json);
             MessageBox.Show("Konfigurace byla úspěšně uložena.", "Úspěch", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();
         }
@@ -36,6 +50,32 @@ namespace DenarCZ.Forms
         {
             txtOrganizationName.Text = AppConfig.Instance.OrganizationName;
             txtRootDataPath.Text = AppConfig.Instance.RootDataPath;
+            txtConfidentialityLevels.Text = AppConfig.Instance.ConfidentialityLevels;
+            txtConfidentialityLabels.Text = AppConfig.Instance.ConfidentialityLabels;
+            txtIntegrityLevels.Text = AppConfig.Instance.IntegrityLevels;
+            txtIntegrityLabels.Text = AppConfig.Instance.IntegrityLabels;
+            txtAvailabilityLevels.Text = AppConfig.Instance.AvailabilityLevels;
+            txtAvailabilityLabels.Text = AppConfig.Instance.AvailabilityLabels;
+            string [] categories = AppConfig.Instance.AssetCategories.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            lstCategories.Items.Clear();
+            lstCategories.Items.AddRange(categories);
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            if (txtCategory.Text.Trim() != "")
+            {
+                lstCategories.Items.Add(txtCategory.Text.Trim());
+                txtCategory.Text = "";
+            }
+        }
+
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+            if (lstCategories.SelectedIndex>=0)
+            {
+                lstCategories.Items.RemoveAt(lstCategories.SelectedIndex);
+            }
         }
     }
 }

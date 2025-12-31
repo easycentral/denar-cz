@@ -29,6 +29,14 @@ namespace DenarCZ.Data
         public string RootDataPath { get; set; } = string.Empty;
         public string DataFileName { get; set; } = "";
         public string OrganizationName { get; set; } = string.Empty;
+        public string AssetCategories { get; set; } = string.Empty;
+        public string ConfidentialityLevels { get; set; } = string.Empty;
+        public string IntegrityLevels { get; set; } = string.Empty;
+        public string AvailabilityLevels { get; set; } = string.Empty;
+        public string ConfidentialityLabels { get; set; } = string.Empty;
+        public string IntegrityLabels { get; set; } = string.Empty;
+        public string AvailabilityLabels { get; set; } = string.Empty;
+
 
         // Soukromý konstruktor
         private AppConfig()
@@ -44,7 +52,15 @@ namespace DenarCZ.Data
             {
                 Id = this.Id,
                 OrganizationName = this.OrganizationName,
-                LastModified = this.LastModified
+                LastModified = this.LastModified,
+                AssetCategories = this.AssetCategories,
+                ConfidentialityLevels = this.ConfidentialityLevels,
+                IntegrityLevels = this.IntegrityLevels,
+                AvailabilityLevels = this.AvailabilityLevels,
+                ConfidentialityLabels = this.ConfidentialityLabels,
+                IntegrityLabels = this.IntegrityLabels,
+                AvailabilityLabels = this.AvailabilityLabels
+
             };
             return saveData;
         } 
@@ -56,6 +72,14 @@ namespace DenarCZ.Data
                 //this.RootDataPath = source.RootDataPath;
                 this.OrganizationName = source.OrganizationName;
                 this.LastModified = source.LastModified;
+                this.AssetCategories = source.AssetCategories;
+                this.ConfidentialityLevels = source.ConfidentialityLevels;
+                this.IntegrityLevels = source.IntegrityLevels;
+                this.AvailabilityLevels = source.AvailabilityLevels;
+                this.ConfidentialityLabels = source.ConfidentialityLabels;
+                this.IntegrityLabels = source.IntegrityLabels;
+                this.AvailabilityLabels = source.AvailabilityLabels;
+
                 return 0;
             }
             return -1;

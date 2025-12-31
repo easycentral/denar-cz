@@ -63,6 +63,7 @@ namespace DenarData.Asset
         [Category("Související aktiva")]
         [DisplayName("ID podpůrných aktiv")]
         [Description("Seznam ID podpůrných aktiv spojených s tímto primárním aktivem")]
+        [ReadOnly(true)]
         public List<Guid> SupportingAssetIds { get; set; }
 
         public PrimaryAsset()

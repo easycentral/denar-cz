@@ -62,29 +62,30 @@
             // mnuFileNew
             // 
             mnuFileNew.Name = "mnuFileNew";
-            mnuFileNew.Size = new Size(164, 22);
+            mnuFileNew.Size = new Size(180, 22);
             mnuFileNew.Text = "&Nový";
             mnuFileNew.Click += mnuFileNew_Click;
             // 
             // mnuFileOpen
             // 
             mnuFileOpen.Name = "mnuFileOpen";
-            mnuFileOpen.Size = new Size(164, 22);
+            mnuFileOpen.Size = new Size(180, 22);
             mnuFileOpen.Text = "&Otevřít";
             mnuFileOpen.Click += mnuFileOpen_Click;
             // 
             // mnuFileSaveAs
             // 
             mnuFileSaveAs.Name = "mnuFileSaveAs";
-            mnuFileSaveAs.Size = new Size(164, 22);
+            mnuFileSaveAs.Size = new Size(180, 22);
             mnuFileSaveAs.Text = "U&ložit jako";
             mnuFileSaveAs.Click += mnuFileSaveAs_Click;
             // 
             // mnuFileExit
             // 
             mnuFileExit.Name = "mnuFileExit";
-            mnuFileExit.Size = new Size(164, 22);
+            mnuFileExit.Size = new Size(180, 22);
             mnuFileExit.Text = "&Konec";
+            mnuFileExit.Click += mnuFileExit_Click;
             // 
             // mnuOptions
             // 
