@@ -11,6 +11,9 @@ namespace DenarCZ
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public EntityManager<PrimaryAsset> AssetManager { get; set; } = new EntityManager<PrimaryAsset>("", "PrimaryAssets");
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public EntityManager<SupportingAsset> SupportingAssetManager { get; set; } = new EntityManager<SupportingAsset>("", "SupportingAssets");
         public MainForm()
         {
             InitializeComponent();
@@ -106,6 +109,23 @@ namespace DenarCZ
         private void mnuFileExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void mnuAssetSupporting_Click(object sender, EventArgs e)
+        {
+            SupportingAssetManager.LoadAll();
+            DataListForm dataListForm = new DataListForm()
+            {
+                Text = "Správa podpùrných aktiv",
+                DataItems = SupportingAssetManager.Items.Values.Cast<IDataItem>().ToList()
+            };
+            dataListForm.pnlData.Controls.Add(new SupportingAssetsGrid(SupportingAssetManager)
+            {
+                Dock = DockStyle.Fill,
+            });
+            dataListForm.MdiParent = this;
+            dataListForm.Show();
+
         }
     }
 }

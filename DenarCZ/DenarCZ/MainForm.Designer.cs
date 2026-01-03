@@ -38,6 +38,7 @@
             mnuOptionsSettings = new ToolStripMenuItem();
             mnuAsset = new ToolStripMenuItem();
             mnuAssetPrimary = new ToolStripMenuItem();
+            mnuAssetSupporting = new ToolStripMenuItem();
             mnuMain.SuspendLayout();
             SuspendLayout();
             // 
@@ -62,28 +63,28 @@
             // mnuFileNew
             // 
             mnuFileNew.Name = "mnuFileNew";
-            mnuFileNew.Size = new Size(180, 22);
+            mnuFileNew.Size = new Size(164, 22);
             mnuFileNew.Text = "&Nový";
             mnuFileNew.Click += mnuFileNew_Click;
             // 
             // mnuFileOpen
             // 
             mnuFileOpen.Name = "mnuFileOpen";
-            mnuFileOpen.Size = new Size(180, 22);
+            mnuFileOpen.Size = new Size(164, 22);
             mnuFileOpen.Text = "&Otevřít";
             mnuFileOpen.Click += mnuFileOpen_Click;
             // 
             // mnuFileSaveAs
             // 
             mnuFileSaveAs.Name = "mnuFileSaveAs";
-            mnuFileSaveAs.Size = new Size(180, 22);
+            mnuFileSaveAs.Size = new Size(164, 22);
             mnuFileSaveAs.Text = "U&ložit jako";
             mnuFileSaveAs.Click += mnuFileSaveAs_Click;
             // 
             // mnuFileExit
             // 
             mnuFileExit.Name = "mnuFileExit";
-            mnuFileExit.Size = new Size(180, 22);
+            mnuFileExit.Size = new Size(164, 22);
             mnuFileExit.Text = "&Konec";
             mnuFileExit.Click += mnuFileExit_Click;
             // 
@@ -103,7 +104,7 @@
             // 
             // mnuAsset
             // 
-            mnuAsset.DropDownItems.AddRange(new ToolStripItem[] { mnuAssetPrimary });
+            mnuAsset.DropDownItems.AddRange(new ToolStripItem[] { mnuAssetPrimary, mnuAssetSupporting });
             mnuAsset.Name = "mnuAsset";
             mnuAsset.Size = new Size(68, 22);
             mnuAsset.Text = "&Aktiva";
@@ -114,6 +115,13 @@
             mnuAssetPrimary.Size = new Size(196, 22);
             mnuAssetPrimary.Text = "Primární aktiva";
             mnuAssetPrimary.Click += mnuAssetPrimary_Click;
+            // 
+            // mnuAssetSupporting
+            // 
+            mnuAssetSupporting.Name = "mnuAssetSupporting";
+            mnuAssetSupporting.Size = new Size(196, 22);
+            mnuAssetSupporting.Text = "Podpůrná aktiva";
+            mnuAssetSupporting.Click += mnuAssetSupporting_Click;
             // 
             // MainForm
             // 
@@ -145,5 +153,6 @@
         private ToolStripMenuItem mnuOptionsSettings;
         private ToolStripMenuItem mnuAsset;
         private ToolStripMenuItem mnuAssetPrimary;
+        private ToolStripMenuItem mnuAssetSupporting;
     }
 }

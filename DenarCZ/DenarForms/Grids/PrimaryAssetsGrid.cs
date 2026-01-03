@@ -22,206 +22,87 @@ namespace DenarForms.Grids
             return base.GetEntityManager<PrimaryAsset>();
         }
 
+        protected override string GetDeleteConfirmationMessage()
+        {
+            return "Opravdu chcete smazat vybrané aktivum?";
+        }
+
+        protected override IDataItem NewItem()
+        {
+            return new PrimaryAsset();
+        }
+
         public override void ConfigureGrid()
         {
             base.ConfigureGrid();
             grdData.Columns["LastModified"].ReadOnly = true;
             grdData.Columns["Description"].Visible = false;
 
-            // Zde můžete přidat další konfigurace specifické pro PrimaryAsset, pokud je potřeba
-
-
             // Převést sloupec AssetCategory na ComboBox s hodnotami z konfigurace
-            int assetCategoryColumnIndex = grdData.Columns["AssetCategory"].DisplayIndex;
-            grdData.Columns.Remove("AssetCategory");
+            ConfigureComboBoxColumn("AssetCategory", "Kategorie aktiva", 
+                AppConfig.Instance.AssetCategories.Split(';'));
+
+            // Převést sloupce pro hodnocení CIA
+            ConfigureLevelColumn("ConfidentialityRequirement", "Důvěrnost",
+                AppConfig.Instance.ConfidentialityLevels, AppConfig.Instance.ConfidentialityLabels);
+
+            ConfigureLevelColumn("IntegrityRequirement", "Integrita",
+                AppConfig.Instance.IntegrityLevels, AppConfig.Instance.IntegrityLabels);
+
+            ConfigureLevelColumn("AvailabilityRequirement", "Dostupnost",
+                AppConfig.Instance.AvailabilityLevels, AppConfig.Instance.AvailabilityLabels);
+
+            ConfigureLevelColumn("Criticality", "Kritičnost",
+                AppConfig.Instance.CriticalityLevels, AppConfig.Instance.CriticalityLabels, true);
+
+            // ošetři DataError
+            grdData.DataError += (s, e) => { e.ThrowException = false; };
+        }
+
+        private void ConfigureComboBoxColumn(string columnName, string headerText, string[] items)
+        {
+            int columnIndex = grdData.Columns[columnName].DisplayIndex;
+            grdData.Columns.Remove(columnName);
+            
             var col = new DataGridViewComboBoxColumn
             {
-                Name = "AssetCategory",
-                DisplayIndex = assetCategoryColumnIndex,
-                HeaderText = "Kategorie aktiva",
-                DataPropertyName = "AssetCategory" 
+                Name = columnName,
+                DisplayIndex = columnIndex,
+                HeaderText = headerText,
+                DataPropertyName = columnName
             };
-
-            // statické hodnoty
-            col.Items.AddRange(AppConfig.Instance.AssetCategories.Split(';'));
-
-            // přidat do gridu
+            col.Items.AddRange(items);
             grdData.Columns.Add(col);
+        }
 
+        private void ConfigureLevelColumn(string columnName, string headerText, 
+            string levels, string labels, bool readOnly = false)
+        {
+            int columnIndex = grdData.Columns[columnName].DisplayIndex;
+            grdData.Columns.Remove(columnName);
 
-            // Převést sloupec ConfidentialityRequirement na ComboBox s hodnotami z konfigurace
-            int confColumnIndex = grdData.Columns["ConfidentialityRequirement"].DisplayIndex;
-            grdData.Columns.Remove("ConfidentialityRequirement");
+            var levelLabels = LookupProvider.GetLevelLabels(levels, labels);
+            var dataSource = levelLabels.Select(x => new { Value = x.Value, Label = x.Label }).ToList();
 
-            var levels = LookupProvider.GetLevelLabels(
-                AppConfig.Instance.ConfidentialityLevels,  
-                AppConfig.Instance.ConfidentialityLabels   
-            );
-
-            var dataSource = levels.Select(x => new { Value = x.Value, Label = x.Label }).ToList();
-
-            var conf = new DataGridViewComboBoxColumn
+            var col = new DataGridViewComboBoxColumn
             {
-                Name = "ConfidentialityRequirement",
-                HeaderText = "Důvěrnost",
-                DataPropertyName = "ConfidentialityRequirement", 
+                Name = columnName,
+                HeaderText = headerText,
+                DataPropertyName = columnName,
                 DataSource = dataSource,
-                ValueMember = "Value",    // uloží se číslo (int)
-                DisplayMember = "Label",  // zobrazí se text
-                //DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton,
-                //FlatStyle = FlatStyle.Flat,
-                DisplayIndex = confColumnIndex
+                ValueMember = "Value",
+                DisplayMember = "Label",
+                DisplayIndex = columnIndex,
+                ReadOnly = readOnly
             };
 
-            
-            grdData.Columns.Add(conf);
-
-            // Převést sloupec IntegrityRequirement na ComboBox s hodnotami z konfigurace
-            int integColumnIndex = grdData.Columns["IntegrityRequirement"].DisplayIndex;
-            grdData.Columns.Remove("IntegrityRequirement");
-
-            var integlevels = LookupProvider.GetLevelLabels(
-                AppConfig.Instance.IntegrityLevels,
-                AppConfig.Instance.IntegrityLabels
-            );
-
-            var integdataSource = integlevels.Select(x => new { Value = x.Value, Label = x.Label }).ToList();
-
-            var integ = new DataGridViewComboBoxColumn
-            {
-                Name = "IntegrityRequirement",
-                HeaderText = "Integrita",
-                DataPropertyName = "IntegrityRequirement",
-                DataSource = integdataSource,
-                ValueMember = "Value",    // uloží se číslo (int)
-                DisplayMember = "Label",  // zobrazí se text
-                //DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton,
-                //FlatStyle = FlatStyle.Flat,
-                DisplayIndex = integColumnIndex
-            };
-                        
-            grdData.Columns.Add(integ);
-            // Převést sloupec AvailabilityRequirement na ComboBox s hodnotami z konfigurace
-            int availColumnIndex = grdData.Columns["AvailabilityRequirement"].DisplayIndex;
-            grdData.Columns.Remove("AvailabilityRequirement");
-            var availlevels = LookupProvider.GetLevelLabels(
-                AppConfig.Instance.AvailabilityLevels,
-                AppConfig.Instance.AvailabilityLabels
-            );
-            var availdataSource = availlevels.Select(x => new { Value = x.Value, Label = x.Label }).ToList();
-            var avail = new DataGridViewComboBoxColumn
-            {
-                Name = "AvailabilityRequirement",
-                HeaderText = "Dostupnost",
-                DataPropertyName = "AvailabilityRequirement",
-                DataSource = availdataSource,
-                ValueMember = "Value",    // uloží se číslo (int)
-                DisplayMember = "Label",  // zobrazí se text
-                //DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton,
-                //FlatStyle = FlatStyle.Flat,
-                DisplayIndex = availColumnIndex
-            };
-            grdData.Columns.Add(avail);
-
-
-            // Převést sloupec Criticality na ComboBox s hodnotami z konfigurace
-            int critColumnIndex = grdData.Columns["Criticality"].DisplayIndex;
-            grdData.Columns.Remove("Criticality");
-            var critlevels = LookupProvider.GetLevelLabels(
-                AppConfig.Instance.CriticalityLevels,
-                AppConfig.Instance.CriticalityLabels
-            );
-            var critdataSource = critlevels.Select(x => new { Value = x.Value, Label = x.Label }).ToList();
-            var crit = new DataGridViewComboBoxColumn
-            {
-                Name = "Criticality",
-                HeaderText = "Kritičnost",
-                DataPropertyName = "Criticality",
-                DataSource = critdataSource,
-                ValueMember = "Value",    // uloží se číslo (int)
-                DisplayMember = "Label",  // zobrazí se text
-                //DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton,
-                //FlatStyle = FlatStyle.Flat,
-                DisplayIndex = critColumnIndex,
-                ReadOnly = true
-
-            };
-            grdData.Columns.Add(crit);
-
-
-
-            // ošetři DataError (když v datech je hodnota, která v nabídce není)
-            grdData.DataError += (s, e) => { e.ThrowException = false; };
-
-
-
-            
-        }
-        protected override void grdData_UserAddedRow(object sender, DataGridViewRowEventArgs e)
-        {
-            base.grdData_UserAddedRow(sender, e);
-            // Při přidání nového řádku můžeme nastavit výchozí hodnoty
-            //var newRow = e.Row.DataBoundItem as PrimaryAsset;
-            var newRow = new PrimaryAsset();
-            
-            if (newRow != null)
-            {
-                newRow.Id= Guid.NewGuid();
-                newRow.LastModified = DateTime.Now;
-                SaveRow(newRow);
-            }
-        }
-        protected override void grdData_RowValidated(object sender, DataGridViewCellEventArgs e)
-        {
-            base.grdData_RowValidated(sender, e);
-            if (grdData.ReadOnly)
-            {
-                return;
-            }
-            // Při validaci řádku můžeme aktualizovat čas poslední úpravy
-            var row = grdData.Rows[e.RowIndex];
-            var item = row.DataBoundItem as PrimaryAsset;
-            if (item != null)
-            {
-                item.LastModified = DateTime.Now;
-                SaveRow(item);
-                
-            }
-
+            grdData.Columns.Add(col);
         }
 
         protected override void grdData_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
             base.grdData_CellValidating(sender, e);
-            // Příklad vlastní validace: Název aktiva nesmí být prázdný
-            
+            // Vlastní validace pro PrimaryAsset
         }
-
-        protected override void grdData_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
-        {
-            if (grdData.ReadOnly)             {
-                e.Cancel = true;
-                return;
-            }
-            if (MessageBox.Show("Opravdu chcete smazat vybrané aktivum?", "Potvrzení smazání", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes)
-            {
-                e.Cancel = true;
-                return;
-            }
-            //base.grdData_UserDeletingRow(sender, e);
-            var row = e.Row;
-            var item = row.DataBoundItem as PrimaryAsset;
-            if (item != null)
-            {
-                DeleteRow(item);
-            }
-        }
-
-        protected override IDataItem NewItem()
-        {
-            return new PrimaryAsset();
-            
-        }
-
     }
 }
