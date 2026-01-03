@@ -37,6 +37,9 @@
             tabSettings = new TabControl();
             tabSetGeneral = new TabPage();
             tabSetLevels = new TabPage();
+            txtCriticalityLevels = new TextBox();
+            label10 = new Label();
+            label11 = new Label();
             label9 = new Label();
             txtAvailabilityLevels = new TextBox();
             txtIntegrityLabels = new TextBox();
@@ -55,6 +58,7 @@
             btnRemove = new Button();
             btnAdd = new Button();
             lstCategories = new ListBox();
+            txtCriticalityLabels = new TextBox();
             tabSettings.SuspendLayout();
             tabSetGeneral.SuspendLayout();
             tabSetLevels.SuspendLayout();
@@ -96,7 +100,8 @@
             // 
             // btnOK
             // 
-            btnOK.Location = new Point(663, 297);
+            btnOK.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnOK.Location = new Point(663, 366);
             btnOK.Name = "btnOK";
             btnOK.Size = new Size(75, 29);
             btnOK.TabIndex = 3;
@@ -106,7 +111,8 @@
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(744, 297);
+            btnCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnCancel.Location = new Point(744, 366);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(75, 29);
             btnCancel.TabIndex = 3;
@@ -123,7 +129,7 @@
             tabSettings.Location = new Point(12, 12);
             tabSettings.Name = "tabSettings";
             tabSettings.SelectedIndex = 0;
-            tabSettings.Size = new Size(820, 279);
+            tabSettings.Size = new Size(820, 348);
             tabSettings.TabIndex = 4;
             // 
             // tabSetGeneral
@@ -136,13 +142,17 @@
             tabSetGeneral.Location = new Point(4, 27);
             tabSetGeneral.Name = "tabSetGeneral";
             tabSetGeneral.Padding = new Padding(3);
-            tabSetGeneral.Size = new Size(812, 248);
+            tabSetGeneral.Size = new Size(812, 317);
             tabSetGeneral.TabIndex = 0;
             tabSetGeneral.Text = "Obecné";
             // 
             // tabSetLevels
             // 
             tabSetLevels.BackColor = SystemColors.Control;
+            tabSetLevels.Controls.Add(txtCriticalityLabels);
+            tabSetLevels.Controls.Add(txtCriticalityLevels);
+            tabSetLevels.Controls.Add(label10);
+            tabSetLevels.Controls.Add(label11);
             tabSetLevels.Controls.Add(label9);
             tabSetLevels.Controls.Add(txtAvailabilityLevels);
             tabSetLevels.Controls.Add(txtIntegrityLabels);
@@ -156,12 +166,38 @@
             tabSetLevels.Controls.Add(txtIntegrityLevels);
             tabSetLevels.Controls.Add(label3);
             tabSetLevels.Controls.Add(txtConfidentialityLevels);
-            tabSetLevels.Location = new Point(4, 24);
+            tabSetLevels.Location = new Point(4, 27);
             tabSetLevels.Name = "tabSetLevels";
             tabSetLevels.Padding = new Padding(3);
-            tabSetLevels.Size = new Size(812, 251);
+            tabSetLevels.Size = new Size(812, 317);
             tabSetLevels.TabIndex = 1;
             tabSetLevels.Text = "Úrovně";
+            // 
+            // txtCriticalityLevels
+            // 
+            txtCriticalityLevels.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            txtCriticalityLevels.Location = new Point(226, 243);
+            txtCriticalityLevels.Name = "txtCriticalityLevels";
+            txtCriticalityLevels.Size = new Size(574, 25);
+            txtCriticalityLevels.TabIndex = 64;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(17, 280);
+            label10.Name = "label10";
+            label10.Size = new Size(200, 18);
+            label10.TabIndex = 62;
+            label10.Text = "Názvy úrovní kritičnosti";
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new Point(17, 248);
+            label11.Name = "label11";
+            label11.Size = new Size(152, 18);
+            label11.TabIndex = 63;
+            label11.Text = "Úrovně kritičnosti";
             // 
             // label9
             // 
@@ -281,10 +317,10 @@
             tabSetCategories.Controls.Add(btnRemove);
             tabSetCategories.Controls.Add(btnAdd);
             tabSetCategories.Controls.Add(lstCategories);
-            tabSetCategories.Location = new Point(4, 27);
+            tabSetCategories.Location = new Point(4, 24);
             tabSetCategories.Name = "tabSetCategories";
             tabSetCategories.Padding = new Padding(3);
-            tabSetCategories.Size = new Size(812, 248);
+            tabSetCategories.Size = new Size(812, 320);
             tabSetCategories.TabIndex = 2;
             tabSetCategories.Text = "Kategorie aktiv";
             // 
@@ -320,14 +356,22 @@
             lstCategories.FormattingEnabled = true;
             lstCategories.Location = new Point(15, 64);
             lstCategories.Name = "lstCategories";
-            lstCategories.Size = new Size(658, 166);
+            lstCategories.Size = new Size(658, 220);
             lstCategories.TabIndex = 0;
+            // 
+            // txtCriticalityLabels
+            // 
+            txtCriticalityLabels.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            txtCriticalityLabels.Location = new Point(226, 277);
+            txtCriticalityLabels.Name = "txtCriticalityLabels";
+            txtCriticalityLabels.Size = new Size(574, 25);
+            txtCriticalityLabels.TabIndex = 65;
             // 
             // Settings
             // 
             AutoScaleDimensions = new SizeF(8F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(844, 338);
+            ClientSize = new Size(844, 407);
             Controls.Add(tabSettings);
             Controls.Add(btnCancel);
             Controls.Add(btnOK);
@@ -378,5 +422,9 @@
         private TextBox txtCategory;
         private Button btnRemove;
         private ListBox lstCategories;
+        private TextBox txtCriticalityLevels;
+        private Label label10;
+        private Label label11;
+        private TextBox txtCriticalityLabels;
     }
 }

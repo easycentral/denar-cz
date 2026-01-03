@@ -1,10 +1,12 @@
 ﻿using DenarData.Common;
+using DenarData.Lookup;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Drawing.Design;
 using System.Text;
+using System.Windows.Forms;
 
 namespace DenarData.Asset
 {
@@ -35,6 +37,7 @@ namespace DenarData.Asset
         [Category("Detaily aktiva")]
         [DisplayName("Kategorie aktiva")]
         [Description("Kategorie, do které primární aktivum patří")]
+        [TypeConverter(typeof(AssetCategoryTypeConverter))]
         public string AssetCategory { get; set; }
         [Category("Detaily aktiva")]
         [DisplayName("Vlastník")]
@@ -43,28 +46,33 @@ namespace DenarData.Asset
         [Category("Ohodnocení")]
         [DisplayName("Důvěrnost")]
         [Description("Hodnocení důvěrnosti primárního aktiva (1-4)")]
+        [TypeConverter(typeof(LevelLookupConverter))]
         public int ConfidentialityRequirement { get; set; }
         [Category("Ohodnocení")]
         [DisplayName("Integrita")]
         [Description("Hodnocení integrity primárního aktiva (1-4)")]
+        [TypeConverter(typeof(LevelLookupConverter))]
         public int IntegrityRequirement { get; set; }
         [Category("Ohodnocení")]
         [DisplayName("Dostupnost")]
         [Description("Hodnocení dostupnosti primárního aktiva (1-4)")]
+        [TypeConverter(typeof(LevelLookupConverter))]
         public int AvailabilityRequirement { get; set; }
         [Category("Ohodnocení")]
         [DisplayName("Kritičnost")]
         [Description("Kritičnost primárního aktiva, vypočítaná jako maximum z hodnocení důvěrnosti, integrity a dostupnosti")]
         [ReadOnly(true)]
+        [TypeConverter(typeof(LevelLookupConverter))]
         public int Criticality => Math.Max(ConfidentialityRequirement,
                                   Math.Max(IntegrityRequirement, AvailabilityRequirement));
 
 
-        [Category("Související aktiva")]
-        [DisplayName("ID podpůrných aktiv")]
-        [Description("Seznam ID podpůrných aktiv spojených s tímto primárním aktivem")]
-        [ReadOnly(true)]
-        public List<Guid> SupportingAssetIds { get; set; }
+        //[Category("Související aktiva")]
+        //[DisplayName("ID podpůrných aktiv")]
+        //[Description("Seznam ID podpůrných aktiv spojených s tímto primárním aktivem")]
+        //[ReadOnly(true)]
+        
+        //public List<Guid> SupportingAssetIds { get; set; }
 
         public PrimaryAsset()
         {
@@ -74,14 +82,14 @@ namespace DenarData.Asset
             Description = string.Empty;
             AssetCategory = string.Empty;
             Owner = string.Empty;
-            SupportingAssetIds = new List<Guid>();
+            //SupportingAssetIds = new List<Guid>();
         }
 
         
         public IDataItem GetSaveData()
         {
             var copy = (PrimaryAsset)this.MemberwiseClone();
-            copy.SupportingAssetIds = new List<Guid>(this.SupportingAssetIds);
+            //copy.SupportingAssetIds = new List<Guid>(this.SupportingAssetIds);
             return copy;
         }
 
@@ -98,9 +106,9 @@ namespace DenarData.Asset
                 this.ConfidentialityRequirement = source.ConfidentialityRequirement;
                 this.IntegrityRequirement = source.IntegrityRequirement;
                 this.AvailabilityRequirement = source.AvailabilityRequirement;
-                this.SupportingAssetIds = source.SupportingAssetIds != null
-                    ? new List<Guid>(source.SupportingAssetIds)
-                    : new List<Guid>();
+                //this.SupportingAssetIds = source.SupportingAssetIds != null
+                //    ? new List<Guid>(source.SupportingAssetIds)
+                //    : new List<Guid>();
                 return 0;
             }
             return -1;

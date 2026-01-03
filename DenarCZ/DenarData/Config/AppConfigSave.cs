@@ -19,6 +19,8 @@ namespace DenarCZ.Data
         public string ConfidentialityLabels { get; set; } = string.Empty;
         public string IntegrityLabels { get; set; } = string.Empty;
         public string AvailabilityLabels { get; set; } = string.Empty;
+        public string CriticalityLevels { get; set; } = string.Empty;
+        public string CriticalityLabels { get; set; } = string.Empty;
 
         public IDataItem GetSaveData() => (AppConfigSave)this.MemberwiseClone();
         public int Load(IDataItem item)

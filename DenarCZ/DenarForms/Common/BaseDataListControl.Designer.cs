@@ -92,6 +92,7 @@
             // 
             // chkReadOnly
             // 
+            chkReadOnly.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             chkReadOnly.AutoSize = true;
             chkReadOnly.Checked = true;
             chkReadOnly.CheckState = CheckState.Checked;

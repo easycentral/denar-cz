@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DenarData.Lookup;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +13,8 @@ namespace DenarForms.Common
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public object EditedItem { get; set; } = null;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public AssetCategories? AssetCategories { get; set; }
         public BaseDataDetailControl()
         {
             InitializeComponent();

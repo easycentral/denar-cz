@@ -36,6 +36,8 @@ namespace DenarCZ.Data
         public string ConfidentialityLabels { get; set; } = string.Empty;
         public string IntegrityLabels { get; set; } = string.Empty;
         public string AvailabilityLabels { get; set; } = string.Empty;
+        public string CriticalityLevels { get; set; } = string.Empty;
+        public string CriticalityLabels { get; set; } = string.Empty;
 
 
         // Soukromý konstruktor
@@ -59,7 +61,9 @@ namespace DenarCZ.Data
                 AvailabilityLevels = this.AvailabilityLevels,
                 ConfidentialityLabels = this.ConfidentialityLabels,
                 IntegrityLabels = this.IntegrityLabels,
-                AvailabilityLabels = this.AvailabilityLabels
+                AvailabilityLabels = this.AvailabilityLabels,
+                CriticalityLevels = this.CriticalityLevels,
+                CriticalityLabels = this.CriticalityLabels
 
             };
             return saveData;
@@ -79,6 +83,8 @@ namespace DenarCZ.Data
                 this.ConfidentialityLabels = source.ConfidentialityLabels;
                 this.IntegrityLabels = source.IntegrityLabels;
                 this.AvailabilityLabels = source.AvailabilityLabels;
+                this.CriticalityLabels = source.CriticalityLabels;
+                this.CriticalityLevels = source.CriticalityLevels;
 
                 return 0;
             }

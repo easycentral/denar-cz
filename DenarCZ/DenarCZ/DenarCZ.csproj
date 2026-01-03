@@ -13,4 +13,8 @@
     <ProjectReference Include="..\DenarForms\DenarForms.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\" />
+  </ItemGroup>
+
 </Project>
