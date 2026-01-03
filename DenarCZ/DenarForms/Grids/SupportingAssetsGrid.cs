@@ -39,21 +39,26 @@ namespace DenarForms.Grids
             grdData.Columns["Description"].Visible = false;
 
             // Převést sloupec AssetType na ComboBox
-            int assetTypeColumnIndex = grdData.Columns["AssetType"].DisplayIndex;
-            grdData.Columns.Remove("AssetType");
-            
-            var col = new DataGridViewComboBoxColumn
-            {
-                Name = "AssetType",
-                DisplayIndex = assetTypeColumnIndex,
-                HeaderText = "Typ aktiva",
-                DataPropertyName = "AssetType"
-            };
-            col.Items.AddRange(new string[] { "Hardware", "Software", "Síť", "Personál", "Prostory", "Data", "Dokumenty" });
-            grdData.Columns.Add(col);
+            ConfigureComboBoxColumn("AssetType", "Typ aktiva", AppConfig.Instance.SupportingAssetTypes.Split(';'));
 
             // ošetři DataError
             grdData.DataError += (s, e) => { e.ThrowException = false; };
+        }
+
+        private void ConfigureComboBoxColumn(string columnName, string headerText, string[] items)
+        {
+            int columnIndex = grdData.Columns[columnName].DisplayIndex;
+            grdData.Columns.Remove(columnName);
+
+            var col = new DataGridViewComboBoxColumn
+            {
+                Name = columnName,
+                DisplayIndex = columnIndex,
+                HeaderText = headerText,
+                DataPropertyName = columnName
+            };
+            col.Items.AddRange(items);
+            grdData.Columns.Add(col);
         }
 
         protected override void grdData_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)

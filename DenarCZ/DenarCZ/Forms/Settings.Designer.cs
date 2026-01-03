@@ -37,6 +37,7 @@
             tabSettings = new TabControl();
             tabSetGeneral = new TabPage();
             tabSetLevels = new TabPage();
+            txtCriticalityLabels = new TextBox();
             txtCriticalityLevels = new TextBox();
             label10 = new Label();
             label11 = new Label();
@@ -54,15 +55,22 @@
             label3 = new Label();
             txtConfidentialityLevels = new TextBox();
             tabSetCategories = new TabPage();
+            label12 = new Label();
             txtCategory = new TextBox();
             btnRemove = new Button();
             btnAdd = new Button();
             lstCategories = new ListBox();
-            txtCriticalityLabels = new TextBox();
+            tabSetSATypes = new TabPage();
+            label13 = new Label();
+            txtType = new TextBox();
+            btnTypeRemove = new Button();
+            btnAddType = new Button();
+            lstTypes = new ListBox();
             tabSettings.SuspendLayout();
             tabSetGeneral.SuspendLayout();
             tabSetLevels.SuspendLayout();
             tabSetCategories.SuspendLayout();
+            tabSetSATypes.SuspendLayout();
             SuspendLayout();
             // 
             // label1
@@ -126,6 +134,7 @@
             tabSettings.Controls.Add(tabSetGeneral);
             tabSettings.Controls.Add(tabSetLevels);
             tabSettings.Controls.Add(tabSetCategories);
+            tabSettings.Controls.Add(tabSetSATypes);
             tabSettings.Location = new Point(12, 12);
             tabSettings.Name = "tabSettings";
             tabSettings.SelectedIndex = 0;
@@ -166,12 +175,20 @@
             tabSetLevels.Controls.Add(txtIntegrityLevels);
             tabSetLevels.Controls.Add(label3);
             tabSetLevels.Controls.Add(txtConfidentialityLevels);
-            tabSetLevels.Location = new Point(4, 27);
+            tabSetLevels.Location = new Point(4, 24);
             tabSetLevels.Name = "tabSetLevels";
             tabSetLevels.Padding = new Padding(3);
-            tabSetLevels.Size = new Size(812, 317);
+            tabSetLevels.Size = new Size(812, 320);
             tabSetLevels.TabIndex = 1;
             tabSetLevels.Text = "Úrovně";
+            // 
+            // txtCriticalityLabels
+            // 
+            txtCriticalityLabels.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            txtCriticalityLabels.Location = new Point(226, 277);
+            txtCriticalityLabels.Name = "txtCriticalityLabels";
+            txtCriticalityLabels.Size = new Size(574, 25);
+            txtCriticalityLabels.TabIndex = 65;
             // 
             // txtCriticalityLevels
             // 
@@ -313,6 +330,7 @@
             // tabSetCategories
             // 
             tabSetCategories.BackColor = SystemColors.Control;
+            tabSetCategories.Controls.Add(label12);
             tabSetCategories.Controls.Add(txtCategory);
             tabSetCategories.Controls.Add(btnRemove);
             tabSetCategories.Controls.Add(btnAdd);
@@ -322,7 +340,16 @@
             tabSetCategories.Padding = new Padding(3);
             tabSetCategories.Size = new Size(812, 320);
             tabSetCategories.TabIndex = 2;
-            tabSetCategories.Text = "Kategorie aktiv";
+            tabSetCategories.Text = "Primární aktiva";
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new Point(15, 13);
+            label12.Name = "label12";
+            label12.Size = new Size(216, 18);
+            label12.TabIndex = 3;
+            label12.Text = "Kategorie primárních aktiv";
             // 
             // txtCategory
             // 
@@ -359,13 +386,63 @@
             lstCategories.Size = new Size(658, 220);
             lstCategories.TabIndex = 0;
             // 
-            // txtCriticalityLabels
+            // tabSetSATypes
             // 
-            txtCriticalityLabels.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            txtCriticalityLabels.Location = new Point(226, 277);
-            txtCriticalityLabels.Name = "txtCriticalityLabels";
-            txtCriticalityLabels.Size = new Size(574, 25);
-            txtCriticalityLabels.TabIndex = 65;
+            tabSetSATypes.BackColor = SystemColors.Control;
+            tabSetSATypes.Controls.Add(label13);
+            tabSetSATypes.Controls.Add(txtType);
+            tabSetSATypes.Controls.Add(btnTypeRemove);
+            tabSetSATypes.Controls.Add(btnAddType);
+            tabSetSATypes.Controls.Add(lstTypes);
+            tabSetSATypes.Location = new Point(4, 27);
+            tabSetSATypes.Name = "tabSetSATypes";
+            tabSetSATypes.Size = new Size(812, 317);
+            tabSetSATypes.TabIndex = 3;
+            tabSetSATypes.Text = "Podpůrná aktiva";
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new Point(12, 23);
+            label13.Name = "label13";
+            label13.Size = new Size(176, 18);
+            label13.TabIndex = 8;
+            label13.Text = "Typy podpůrných aktiv";
+            // 
+            // txtType
+            // 
+            txtType.Location = new Point(12, 44);
+            txtType.Name = "txtType";
+            txtType.Size = new Size(658, 25);
+            txtType.TabIndex = 7;
+            // 
+            // btnTypeRemove
+            // 
+            btnTypeRemove.Location = new Point(680, 74);
+            btnTypeRemove.Name = "btnTypeRemove";
+            btnTypeRemove.Size = new Size(120, 28);
+            btnTypeRemove.TabIndex = 5;
+            btnTypeRemove.Text = "Odebrat";
+            btnTypeRemove.UseVisualStyleBackColor = true;
+            btnTypeRemove.Click += btnTypeRemove_Click;
+            // 
+            // btnAddType
+            // 
+            btnAddType.Location = new Point(680, 41);
+            btnAddType.Name = "btnAddType";
+            btnAddType.Size = new Size(120, 28);
+            btnAddType.TabIndex = 6;
+            btnAddType.Text = "Přidat";
+            btnAddType.UseVisualStyleBackColor = true;
+            btnAddType.Click += btnAddType_Click;
+            // 
+            // lstTypes
+            // 
+            lstTypes.FormattingEnabled = true;
+            lstTypes.Location = new Point(12, 74);
+            lstTypes.Name = "lstTypes";
+            lstTypes.Size = new Size(658, 220);
+            lstTypes.TabIndex = 4;
             // 
             // Settings
             // 
@@ -388,6 +465,8 @@
             tabSetLevels.PerformLayout();
             tabSetCategories.ResumeLayout(false);
             tabSetCategories.PerformLayout();
+            tabSetSATypes.ResumeLayout(false);
+            tabSetSATypes.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -426,5 +505,12 @@
         private Label label10;
         private Label label11;
         private TextBox txtCriticalityLabels;
+        private Label label12;
+        private TabPage tabSetSATypes;
+        private Label label13;
+        private TextBox txtType;
+        private Button btnTypeRemove;
+        private Button btnAddType;
+        private ListBox lstTypes;
     }
 }

@@ -29,6 +29,7 @@ namespace DenarCZ.Forms
             AppConfig.Instance.CriticalityLevels = txtCriticalityLevels.Text;
             AppConfig.Instance.CriticalityLabels = txtCriticalityLabels.Text;
 
+
             List<string> categories = new List<string>();
             foreach (var item in lstCategories.Items)
             {
@@ -36,6 +37,15 @@ namespace DenarCZ.Forms
             }
             categories.Sort();
             AppConfig.Instance.AssetCategories = string.Join(";", categories);
+            
+            List<string> types = new List<string>();
+            foreach (var item in lstTypes.Items)
+            {
+                types.Add(item.ToString());
+            }
+            types.Sort();
+            AppConfig.Instance.SupportingAssetTypes = string.Join(";", types);
+
 
             var config = AppConfig.Instance.GetSaveData();
             var json = System.Text.Json.JsonSerializer.Serialize(config, config.GetType(), new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
@@ -61,9 +71,15 @@ namespace DenarCZ.Forms
             txtAvailabilityLabels.Text = AppConfig.Instance.AvailabilityLabels;
             txtCriticalityLevels.Text = AppConfig.Instance.CriticalityLevels;
             txtCriticalityLabels.Text = AppConfig.Instance.CriticalityLabels;
-            string [] categories = AppConfig.Instance.AssetCategories.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            
+            string[] categories = AppConfig.Instance.AssetCategories.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             lstCategories.Items.Clear();
             lstCategories.Items.AddRange(categories);
+            
+            lstTypes.Items.Clear();
+            string[] types = AppConfig.Instance.SupportingAssetTypes.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            lstTypes.Items.AddRange(types);
+
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -77,9 +93,27 @@ namespace DenarCZ.Forms
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
-            if (lstCategories.SelectedIndex>=0)
+            if (lstCategories.SelectedIndex >= 0)
             {
                 lstCategories.Items.RemoveAt(lstCategories.SelectedIndex);
+            }
+        }
+
+        private void btnAddType_Click(object sender, EventArgs e)
+        {
+            if (txtType.Text.Trim() != "")
+            {
+                lstTypes.Items.Add(txtType.Text.Trim());
+                txtType.Text = "";
+            }
+        }
+
+        private void btnTypeRemove_Click(object sender, EventArgs e)
+        {
+            if (lstTypes.SelectedIndex >= 0)
+            {
+                lstTypes.Items.RemoveAt(lstTypes.SelectedIndex);
+
             }
         }
     }

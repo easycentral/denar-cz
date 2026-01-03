@@ -40,6 +40,7 @@ namespace DenarData.Asset
         [Category("Detaily aktiva")]
         [DisplayName("Typ aktiva")]
         [Description("Typ podpůrného aktiva (HW, SW, Síť, Personál, Prostory, atd.)")]
+        [TypeConverter(typeof(SupAssetTypeConverter))]
         public string AssetType { get; set; }
 
         [Category("Detaily aktiva")]
@@ -48,11 +49,15 @@ namespace DenarData.Asset
         public string Location { get; set; }
 
         [Category("Detaily aktiva")]
+        [DisplayName("Garant")]
+        [Description("Garant podpůrného aktiva")]
+        public string Garant { get; set; }
+        
+        [Category("Detaily aktiva")]
         [DisplayName("Správce")]
         [Description("Správce podpůrného aktiva")]
         public string Administrator { get; set; }
 
-        
 
         public SupportingAsset()
         {

@@ -14,6 +14,9 @@ namespace DenarCZ
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public EntityManager<SupportingAsset> SupportingAssetManager { get; set; } = new EntityManager<SupportingAsset>("", "SupportingAssets");
+        
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public EntityManager<AssetRelationship> RelationshipManager { get; set; } = new EntityManager<AssetRelationship>("", "AssetRelationships");
         public MainForm()
         {
             InitializeComponent();
@@ -36,6 +39,10 @@ namespace DenarCZ
                     DenarCZ.Data.AppConfig.Instance.Load(config);
                     AssetManager = new EntityManager<PrimaryAsset>(AppConfig.Instance.RootDataPath, "PrimaryAssets");
                     AssetManager.LoadAll();
+                    SupportingAssetManager = new EntityManager<SupportingAsset>(AppConfig.Instance.RootDataPath, "SupportingAssets");
+                    SupportingAssetManager.LoadAll();
+                    RelationshipManager = new EntityManager<AssetRelationship>(AppConfig.Instance.RootDataPath, "AssetRelationships");
+                    RelationshipManager.LoadAll();
                     MessageBox.Show("Konfigurace byla úspìšnì naètena.", "Úspìch", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
@@ -64,6 +71,8 @@ namespace DenarCZ
                     AppConfig.Instance.RootDataPath = System.IO.Path.GetDirectoryName(dialog.FileName) ?? string.Empty;
                     AppConfig.Instance.DataFileName = System.IO.Path.GetFileName(dialog.FileName);
                     AssetManager.SetPath(AppConfig.Instance.RootDataPath, "PrimaryAsset");
+                    SupportingAssetManager.SetPath(AppConfig.Instance.RootDataPath, "SupportingAssets");
+                    RelationshipManager.SetPath(AppConfig.Instance.RootDataPath, "AssetRelationships");
                 }
                 catch (Exception ex)
                 {
@@ -77,6 +86,8 @@ namespace DenarCZ
             AppConfig.Instance.RootDataPath = string.Empty;
             AppConfig.Instance.OrganizationName = string.Empty;
             AssetManager = new EntityManager<PrimaryAsset>("", "PrimaryAssets");
+            SupportingAssetManager = new EntityManager<SupportingAsset>("", "SupportingAssets");
+            RelationshipManager = new EntityManager<AssetRelationship>("", "AssetRelationships");
             mnuFileSaveAs_Click(sender, e);
         }
 
@@ -120,6 +131,23 @@ namespace DenarCZ
                 DataItems = SupportingAssetManager.Items.Values.Cast<IDataItem>().ToList()
             };
             dataListForm.pnlData.Controls.Add(new SupportingAssetsGrid(SupportingAssetManager)
+            {
+                Dock = DockStyle.Fill,
+            });
+            dataListForm.MdiParent = this;
+            dataListForm.Show();
+
+        }
+
+        private void mnuAssetRelationship_Click(object sender, EventArgs e)
+        {
+            RelationshipManager.LoadAll();
+            DataListForm dataListForm = new DataListForm()
+            {
+                Text = "Vztahy primárních aktiv",
+                DataItems = RelationshipManager.Items.Values.Cast<IDataItem>().ToList()
+            };
+            dataListForm.pnlData.Controls.Add(new AssetRelationshipsGrid(RelationshipManager, AssetManager, SupportingAssetManager)
             {
                 Dock = DockStyle.Fill,
             });

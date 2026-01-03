@@ -30,6 +30,7 @@ namespace DenarCZ.Data
         public string DataFileName { get; set; } = "";
         public string OrganizationName { get; set; } = string.Empty;
         public string AssetCategories { get; set; } = string.Empty;
+        
         public string ConfidentialityLevels { get; set; } = string.Empty;
         public string IntegrityLevels { get; set; } = string.Empty;
         public string AvailabilityLevels { get; set; } = string.Empty;
@@ -38,6 +39,8 @@ namespace DenarCZ.Data
         public string AvailabilityLabels { get; set; } = string.Empty;
         public string CriticalityLevels { get; set; } = string.Empty;
         public string CriticalityLabels { get; set; } = string.Empty;
+        public string SupportingAssetTypes { get; set; } = string.Empty;
+        public string RelationshipTypes { get; set; } = string.Empty;
 
 
         // Soukromý konstruktor
@@ -63,7 +66,8 @@ namespace DenarCZ.Data
                 IntegrityLabels = this.IntegrityLabels,
                 AvailabilityLabels = this.AvailabilityLabels,
                 CriticalityLevels = this.CriticalityLevels,
-                CriticalityLabels = this.CriticalityLabels
+                CriticalityLabels = this.CriticalityLabels,
+                SupportingAssetTypes = this.SupportingAssetTypes
 
             };
             return saveData;
@@ -85,6 +89,7 @@ namespace DenarCZ.Data
                 this.AvailabilityLabels = source.AvailabilityLabels;
                 this.CriticalityLabels = source.CriticalityLabels;
                 this.CriticalityLevels = source.CriticalityLevels;
+                this.SupportingAssetTypes = source.SupportingAssetTypes;
 
                 return 0;
             }

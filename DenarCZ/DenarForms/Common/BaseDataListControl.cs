@@ -128,5 +128,10 @@ namespace DenarForms.Common
         {
             throw new NotImplementedException("NewItem must be implemented in derived classes.");
         }
+
+        protected virtual void btnDelete_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

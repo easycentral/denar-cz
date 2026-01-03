@@ -39,6 +39,7 @@
             mnuAsset = new ToolStripMenuItem();
             mnuAssetPrimary = new ToolStripMenuItem();
             mnuAssetSupporting = new ToolStripMenuItem();
+            mnuAssetRelationship = new ToolStripMenuItem();
             mnuMain.SuspendLayout();
             SuspendLayout();
             // 
@@ -104,7 +105,7 @@
             // 
             // mnuAsset
             // 
-            mnuAsset.DropDownItems.AddRange(new ToolStripItem[] { mnuAssetPrimary, mnuAssetSupporting });
+            mnuAsset.DropDownItems.AddRange(new ToolStripItem[] { mnuAssetPrimary, mnuAssetSupporting, mnuAssetRelationship });
             mnuAsset.Name = "mnuAsset";
             mnuAsset.Size = new Size(68, 22);
             mnuAsset.Text = "&Aktiva";
@@ -112,16 +113,23 @@
             // mnuAssetPrimary
             // 
             mnuAssetPrimary.Name = "mnuAssetPrimary";
-            mnuAssetPrimary.Size = new Size(196, 22);
+            mnuAssetPrimary.Size = new Size(252, 22);
             mnuAssetPrimary.Text = "Primární aktiva";
             mnuAssetPrimary.Click += mnuAssetPrimary_Click;
             // 
             // mnuAssetSupporting
             // 
             mnuAssetSupporting.Name = "mnuAssetSupporting";
-            mnuAssetSupporting.Size = new Size(196, 22);
+            mnuAssetSupporting.Size = new Size(252, 22);
             mnuAssetSupporting.Text = "Podpůrná aktiva";
             mnuAssetSupporting.Click += mnuAssetSupporting_Click;
+            // 
+            // mnuAssetRelationship
+            // 
+            mnuAssetRelationship.Name = "mnuAssetRelationship";
+            mnuAssetRelationship.Size = new Size(252, 22);
+            mnuAssetRelationship.Text = "Vazby primárních aktiv";
+            mnuAssetRelationship.Click += mnuAssetRelationship_Click;
             // 
             // MainForm
             // 
@@ -154,5 +162,6 @@
         private ToolStripMenuItem mnuAsset;
         private ToolStripMenuItem mnuAssetPrimary;
         private ToolStripMenuItem mnuAssetSupporting;
+        private ToolStripMenuItem mnuAssetRelationship;
     }
 }

@@ -64,7 +64,18 @@ namespace DenarForms.Common
             if (grdData.Columns.Contains("Id"))
                 grdData.Columns["Id"].Visible = false;
             
+            // Přihlásit se k události pro nastavení výchozích hodnot
+            grdData.DefaultValuesNeeded += GrdData_DefaultValuesNeeded;
+            
             ConfigureGrid();
+        }
+
+        private void GrdData_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
+        {
+            // Tato událost se volá při vytváření nového řádku
+            // Nastavíme výchozí hodnoty pro nový objekt
+            e.Row.Cells["Id"].Value = Guid.NewGuid();
+            e.Row.Cells["LastModified"].Value = DateTime.Now;
         }
 
         public void RefreshData()
@@ -98,19 +109,51 @@ namespace DenarForms.Common
             OnEditItemRequested(new ItemEventArgs(selectedItem));
         }
 
+        protected override void btnDelete_Click(object sender, EventArgs e)
+        {
+            // Kontrola readonly režimu
+            if (grdData.ReadOnly)
+            {
+                MessageBox.Show("Nelze mazat v režimu pouze pro čtení.", "Upozornění", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Získat vybranou položku
+            T? selectedItem = SelectedItem;
+            if (selectedItem is null)
+            {
+                MessageBox.Show("Není vybrána žádná položka ke smazání.", "Upozornění", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Získej potvrzovací zprávu z odvozené třídy
+            string confirmationMessage = GetDeleteConfirmationMessage();
+            
+            // Potvrzení smazání
+            if (MessageBox.Show(confirmationMessage, "Potvrzení smazání", 
+                MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes)
+            {
+                return;
+            }
+
+            // Smazat položku
+            DeleteRow(selectedItem);
+        }
+
         // ========== Společné handlery pro všechny gridy ==========
 
         protected override void grdData_UserAddedRow(object sender, DataGridViewRowEventArgs e)
         {
             base.grdData_UserAddedRow(sender, e);
-            // Vytvoř novou instanci pomocí abstraktní metody
-            var newRow = NewItem() as T;
             
-            if (newRow != null)
+            // Získat přidaný objekt z DataBoundItem
+            var newItem = e.Row.DataBoundItem as T;
+            if (newItem != null)
             {
-                newRow.Id = Guid.NewGuid();
-                newRow.LastModified = DateTime.Now;
-                SaveRow(newRow);
+                // Uložit nový záznam
+                SaveRow(newItem);
             }
         }
 
@@ -121,13 +164,33 @@ namespace DenarForms.Common
             {
                 return;
             }
-            // Při validaci řádku aktualizuj čas poslední úpravy
-            var row = grdData.Rows[e.RowIndex];
-            var item = row.DataBoundItem as T;
-            if (item != null)
+
+            // Kontrola platnosti indexu řádku a existence DataBoundItem
+            if (e.RowIndex < 0 || e.RowIndex >= grdData.Rows.Count)
             {
-                item.LastModified = DateTime.Now;
-                SaveRow(item);
+                return;
+            }
+
+            try
+            {
+                var row = grdData.Rows[e.RowIndex];
+
+                // Kontrola, zda řádek má platné DataBoundItem (může být null během RefreshData)
+                if (row.DataBoundItem == null)
+                {
+                    return;
+                }
+
+                var item = row.DataBoundItem as T;
+                if (item != null)
+                {
+                    item.LastModified = DateTime.Now;
+                    SaveRow(item);
+                }
+            }
+            catch (Exception ex)
+            {
+
             }
         }
 
@@ -165,10 +228,5 @@ namespace DenarForms.Common
         {
             return "Opravdu chcete smazat vybranou položku?";
         }
-
-        /// <summary>
-        /// Vytvoří novou instanci položky. Implementováno v odvozených třídách.
-        /// </summary>
-        protected abstract IDataItem NewItem();
     }
 }

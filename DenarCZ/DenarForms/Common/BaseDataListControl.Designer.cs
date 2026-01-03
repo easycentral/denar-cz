@@ -78,6 +78,7 @@
             btnDelete.TabIndex = 2;
             btnDelete.Text = "Smazat";
             btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += btnDelete_Click;
             // 
             // btnNew
             // 
