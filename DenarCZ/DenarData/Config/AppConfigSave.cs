@@ -22,6 +22,8 @@ namespace DenarCZ.Data
         public string CriticalityLevels { get; set; } = string.Empty;
         public string CriticalityLabels { get; set; } = string.Empty;
         public string SupportingAssetTypes { get; set; } = string.Empty;
+        public string ImportanceLevels { get; set; } = string.Empty;
+        public string ImportanceLabels { get; set; } = string.Empty;
 
         public IDataItem GetSaveData() => (AppConfigSave)this.MemberwiseClone();
         public int Load(IDataItem item)

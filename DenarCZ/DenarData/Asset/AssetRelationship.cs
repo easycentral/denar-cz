@@ -55,6 +55,7 @@ namespace DenarData.Asset
         [Category("Detaily")]
         [DisplayName("Dùležitost")]
         [Description("Dùležitost této vazby (1-4)")]
+        [TypeConverter(typeof(DenarData.Lookup.LevelLookupConverter))]
         public int Importance { get; set; }
 
         public AssetRelationship()

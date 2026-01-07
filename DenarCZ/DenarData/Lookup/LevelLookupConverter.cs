@@ -115,7 +115,11 @@ namespace DenarData.Lookup
                     AppConfig.Instance.CriticalityLevels,
                     AppConfig.Instance.CriticalityLabels,
                     int.Parse);
-
+            if (name.IndexOf("Importance", StringComparison.OrdinalIgnoreCase) >= 0)
+                return LookupProvider.ParsePairs(
+                    AppConfig.Instance.ImportanceLevels,
+                    AppConfig.Instance.ImportanceLabels,
+                    int.Parse);
 
             return new System.Collections.Generic.List<(int, string)>();
         }

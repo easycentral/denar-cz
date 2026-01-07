@@ -42,6 +42,9 @@ namespace DenarCZ.Data
         public string SupportingAssetTypes { get; set; } = string.Empty;
         public string RelationshipTypes { get; set; } = string.Empty;
 
+        public string ImportanceLevels { get; set; } = string.Empty;
+        public string ImportanceLabels { get; set; } = string.Empty;
+
 
         // Soukromý konstruktor
         private AppConfig()
@@ -67,7 +70,9 @@ namespace DenarCZ.Data
                 AvailabilityLabels = this.AvailabilityLabels,
                 CriticalityLevels = this.CriticalityLevels,
                 CriticalityLabels = this.CriticalityLabels,
-                SupportingAssetTypes = this.SupportingAssetTypes
+                SupportingAssetTypes = this.SupportingAssetTypes,
+                ImportanceLabels = this.ImportanceLabels,
+                ImportanceLevels = this.ImportanceLevels
 
             };
             return saveData;
@@ -90,6 +95,8 @@ namespace DenarCZ.Data
                 this.CriticalityLabels = source.CriticalityLabels;
                 this.CriticalityLevels = source.CriticalityLevels;
                 this.SupportingAssetTypes = source.SupportingAssetTypes;
+                this.ImportanceLevels = source.ImportanceLevels;
+                this.ImportanceLabels = source.ImportanceLabels;
 
                 return 0;
             }

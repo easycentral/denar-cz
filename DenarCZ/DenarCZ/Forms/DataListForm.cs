@@ -42,6 +42,10 @@ namespace DenarCZ.Forms
                             var emsa = grd.GetEntityManager<SupportingAsset>();
                             OpenDetailForm(emsa, ea.Item as SupportingAsset);
                             break;
+                        case "AssetRelationship":
+                            var emac = grd.GetEntityManager<AssetRelationship>();
+                            OpenDetailForm(emac, ea.Item as AssetRelationship);
+                            break;
                         // Add cases for other IDataItem implementations as needed
                         default:
                             

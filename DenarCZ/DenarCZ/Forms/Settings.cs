@@ -28,7 +28,8 @@ namespace DenarCZ.Forms
             AppConfig.Instance.AvailabilityLabels = txtAvailabilityLabels.Text;
             AppConfig.Instance.CriticalityLevels = txtCriticalityLevels.Text;
             AppConfig.Instance.CriticalityLabels = txtCriticalityLabels.Text;
-
+            AppConfig.Instance.ImportanceLevels = txtImportanceLevels.Text;
+            AppConfig.Instance.ImportanceLabels = txtImportanceLabels.Text;
 
             List<string> categories = new List<string>();
             foreach (var item in lstCategories.Items)
@@ -71,7 +72,9 @@ namespace DenarCZ.Forms
             txtAvailabilityLabels.Text = AppConfig.Instance.AvailabilityLabels;
             txtCriticalityLevels.Text = AppConfig.Instance.CriticalityLevels;
             txtCriticalityLabels.Text = AppConfig.Instance.CriticalityLabels;
-            
+            txtImportanceLabels.Text = AppConfig.Instance.ImportanceLabels;
+            txtImportanceLevels.Text = AppConfig.Instance.ImportanceLevels;
+
             string[] categories = AppConfig.Instance.AssetCategories.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             lstCategories.Items.Clear();
             lstCategories.Items.AddRange(categories);
